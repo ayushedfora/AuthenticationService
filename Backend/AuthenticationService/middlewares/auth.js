@@ -4,6 +4,8 @@ const strings = require('../constants/strings')
 const consts = require('../constants/consts')
 const jwt = require('jsonwebtoken')
 
+
+
 const validateRegisterRequest = (req,res,next) => {
 
   const {body} = req
@@ -63,7 +65,8 @@ const validateToken = (req, res, next) => {
 
 }
 
-const validateMobileSignInRequest = (res, req, next) => {
+const validateMobileSignInRequest = (req, res, next) => {
+  const {body} = req
   if(!body || !body.phoneNumber) {
     sendErrorResponse(res, consts.STATUS_CODES.FOUR_HUNDERD, strings.ERROR_MESSAGES.NO_BODY_FOUND)
   }
@@ -80,7 +83,8 @@ const authMiddleware = {
     validateRegisterRequest,
     validateLoginRequest,
     validateToken,
-    validateMobileSignInRequest
+    validateMobileSignInRequest,
+    otplimiter
 }
 
 module.exports = authMiddleware
